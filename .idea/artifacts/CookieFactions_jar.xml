@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CookieFactions:jar">
+    <output-path>$USER_HOME$/Desktop/DevStuff</output-path>
+    <root id="archive" name="CookieFactions.jar">
+      <element id="module-output" name="CookieFactions" />
+    </root>
+  </artifact>
+</component>

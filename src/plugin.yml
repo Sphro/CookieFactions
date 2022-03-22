@@ -1,0 +1,19 @@
+name: CookieFactions
+main: com.jonah.cookiefactions.BukkitPlugin
+version: 1.0
+depend: [PlaceholderAPI, NametagEdit, ProtocolLib, killStats]
+commands:
+    tpworld:
+    hangars:
+    cfc:
+    chat:
+    ignore:
+    staffchat:
+    message:
+    reply:
+    armor:
+    cfsb:
+    tag:
+        aliases:
+            - settag
+    level:
