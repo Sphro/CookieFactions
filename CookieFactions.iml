@@ -12,5 +12,6 @@
     <orderEntry type="library" name="ProtocolLib" level="project" />
     <orderEntry type="library" name="NametagEdit" level="project" />
     <orderEntry type="library" name="killStats" level="project" />
+    <orderEntry type="library" name="CrackShot" level="project" />
   </component>
 </module>

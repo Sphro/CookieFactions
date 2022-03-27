@@ -1,8 +1,10 @@
 package com.jonah.cookiefactions.util;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.Dye;
 import org.bukkit.material.MaterialData;
 
 import java.util.ArrayList;
@@ -20,7 +22,16 @@ public class ItemBuilder {
 	public static ItemBuilder of(Material material) {
 		return new ItemBuilder(new ItemStack(material));
 	}
-	
+	public static ItemBuilder of(Material material, DyeColor color) {
+		return new ItemBuilder(new ItemStack(material, 1, color.getData()));
+	}
+	public static ItemBuilder of(DyeColor dye) {
+		Dye d = new Dye(dye);
+		return new ItemBuilder(d.toItemStack());
+	}
+
+
+
 	public ItemBuilder setName(String name) {
 		ItemMeta stackMeta = this.stack.getItemMeta();
 		stackMeta.setDisplayName(Text.colorize(name));

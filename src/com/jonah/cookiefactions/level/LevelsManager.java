@@ -29,7 +29,7 @@ public class LevelsManager extends CookieFactionsManagedComponent {
 			System.out.println("Placeholder API Not found for LevelSystem!");
 		}
 		plugin.getCommand("level").setExecutor(new LevelsCommand());
-		Bukkit.getServer().getPluginManager().registerEvents(new Death(), plugin);
+//		Bukkit.getServer().getPluginManager().registerEvents(new Death(), plugin);
 	}
 
 	@Override

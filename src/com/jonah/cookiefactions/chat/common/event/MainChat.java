@@ -20,7 +20,7 @@ public class MainChat implements Listener {
 		try {
 			BukkitPlugin main = BukkitPlugin.getInstance();
 			ChatLib lib = new ChatLib(p.getUniqueId());
-		    TextComponent rest = new TextComponent((Text.colorize(lib.getPrefix() + " " + lib.getNameColor() + p.getName() + "&r &8» &r" + lib.getChatColor()) + msg));
+		    TextComponent rest = new TextComponent((Text.colorize(getPrettyPrefix(lib) + lib.getNameColor() + p.getName() + "&r &8» &r" + lib.getChatColor()) + msg));
 		    String lvl;
 		    TextComponent lvlh = new TextComponent("");
 		    if (includeLevel) {
@@ -55,7 +55,11 @@ public class MainChat implements Listener {
 	
 	public static String getFormattedChat(Player p) {
 		ChatLib lib = new ChatLib(p.getUniqueId());
-		return Text.colorize(lib.getPrefix() + " " + lib.getNameColor() + p.getName());
+		return Text.colorize(getPrettyPrefix(lib) + lib.getNameColor() + p.getName());
+	}
+
+	public static String getPrettyPrefix(ChatLib lib) {
+		return lib.hasPrefix() ? lib.getPrefix() + " " : "";
 	}
 
 	public static String getDMChatFormat(Player p) {

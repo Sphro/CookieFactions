@@ -23,7 +23,8 @@ public class CoreManager extends CookieFactionsManagedComponent {
                 new NoEnderPearl(),
                 new NoRainEvent(),
                 new NoFallDamageEvent(),
-                new NoModifyBlocks()
+                new NoModifyBlocks(),
+                new NoJoinMessageEvent()
         }) Bukkit.getPluginManager().registerEvents(l, BukkitPlugin.getInstance());
 
         main.getCommand("cfc").setExecutor(new CookieFactionsCoreCommand());

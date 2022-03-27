@@ -5,14 +5,17 @@ import com.jonah.cookiefactions.core.CoreManager;
 import com.jonah.cookiefactions.death.StandardDeathFX;
 import com.jonah.cookiefactions.hangars.Hangars;
 import com.jonah.cookiefactions.hangars.HangarsCommand;
+import com.jonah.cookiefactions.killprofile.KillProfileComponent;
 import com.jonah.cookiefactions.level.LevelsManager;
 import com.jonah.cookiefactions.policy.ArmorPolicy;
 import com.jonah.cookiefactions.scoreboard.CookieFactionsScoreboardManager;
 import com.jonah.cookiefactions.util.NameChanger;
 import com.jonah.cookiefactions.util.Text;
 import com.jonah.cookiefactions.util.iw.WIEvent;
+import com.jonah.cookiefactions.weaponlist.WeaponsComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +23,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BukkitPlugin extends JavaPlugin  {
@@ -30,6 +35,8 @@ public class BukkitPlugin extends JavaPlugin  {
     private CoreManager core;
     private ChatManager chat;
     private LevelsManager levels;
+    private WeaponsComponent weapons;
+    private KillProfileComponent killProfile;
     //private NameChanger nameChanger;
     private CookieFactionsScoreboardManager scoreboardManager;
 
@@ -39,12 +46,14 @@ public class BukkitPlugin extends JavaPlugin  {
         core = new CoreManager();
         levels = new LevelsManager();
         chat = new ChatManager();
+        killProfile = new KillProfileComponent();
+        weapons = new WeaponsComponent();
 
         scoreboardManager = new CookieFactionsScoreboardManager(this);
 
         //nameChanger = new NameChanger(this);
 
-        for (CookieFactionsManagedComponent comp : new CookieFactionsManagedComponent[] {core, levels, chat}) {
+        for (CookieFactionsManagedComponent comp : new CookieFactionsManagedComponent[] {core, levels, chat, weapons, killProfile}) {
             comp.onEnable(this);
         }
 
@@ -94,15 +103,31 @@ public class BukkitPlugin extends JavaPlugin  {
             @EventHandler
             public void onDamage(EntityDamageEvent event) {
                 if ((event.getEntity() instanceof Player)) {
-                    Player player = (Player) event.getEntity();
-                    player.getInventory().getHelmet().setDurability((short) 0);
-                    player.getInventory().getChestplate().setDurability((short) 0);
-                    player.getInventory().getLeggings().setDurability((short) 0);
-                    player.getInventory().getBoots().setDurability((short) 0);
+                    try {
+                        Player player = (Player) event.getEntity();
+                        player.getInventory().getHelmet().setDurability((short) 0);
+                        player.getInventory().getChestplate().setDurability((short) 0);
+                        player.getInventory().getLeggings().setDurability((short) 0);
+                        player.getInventory().getBoots().setDurability((short) 0);
+                    } catch (NullPointerException e) {
+
+                    }
                 }
             }
 
             }, this);
+
+
+        Bukkit.getServer().getPluginManager().registerEvents(new Listener() {
+
+            @EventHandler
+            public void onRightClick(PlayerInteractEvent e) {
+                if (e.getPlayer().getItemInHand().getType() == Material.DIAMOND_SPADE) {
+                    e.getPlayer().getItemInHand().setDurability((short) 0);
+                }
+            }
+
+        }, this);
 
         Bukkit.getServer().getPluginManager().registerEvents(new StandardDeathFX(), this);
 
@@ -116,12 +141,20 @@ public class BukkitPlugin extends JavaPlugin  {
         return scoreboardManager;
     }
 
+    public WeaponsComponent getWeapons() {
+        return weapons;
+    }
+
     //public NameChanger getNameChanger() {
     //    return nameChanger;
     //}
 
     public static BukkitPlugin getInstance() {
         return instance;
+    }
+
+    public KillProfileComponent getKillProfile() {
+        return killProfile;
     }
 
     public static CoreManager getCoreManager() {

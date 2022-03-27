@@ -30,7 +30,7 @@ public class IgnoreCommand implements CommandExecutor {
 		} else {
 			sender.sendMessage(Text.colorize("&cYou can only run this command as a player."));
 		}
-		return false;
+		return true;
 	}
 
 }

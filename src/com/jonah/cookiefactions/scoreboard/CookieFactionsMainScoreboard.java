@@ -62,7 +62,7 @@ public class CookieFactionsMainScoreboard implements CookieFactionsScoreboard {
                 String.format("&a&lTop KDR Ranking: &7(&e#%s&7)", api.getRatioRank(p)),
                 " &r&r",
                 "&d&lDiscord:",
-                "&7https://discord.gg/7KNesXF",
+                "&7https://discord.gg/2sdRHkWS3S",
                 " &r",
                 "&bcookiefactions.networkgoalie.com"
         }) {

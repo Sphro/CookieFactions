@@ -29,7 +29,6 @@ public class CookieFactionsScoreboardManager {
         Bukkit.getPluginManager().registerEvents(getListener(), plugin);
         plugin.getCommand("cfsb").setExecutor(new ScoreboardCommand());
 
-
         boardMap = new HashMap<>();
 
         try {
@@ -91,6 +90,7 @@ public class CookieFactionsScoreboardManager {
 
             @EventHandler
             public void onQuit(PlayerQuitEvent e) {
+                boardMap.remove(e.getPlayer().getUniqueId());
                 BukkitPlugin.getInstance().getScoreboardManager().updateAll();
             }
 

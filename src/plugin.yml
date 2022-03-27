@@ -1,7 +1,7 @@
 name: CookieFactions
 main: com.jonah.cookiefactions.BukkitPlugin
 version: 1.0
-depend: [PlaceholderAPI, NametagEdit, ProtocolLib, killStats]
+depend: [PlaceholderAPI, NametagEdit, ProtocolLib, killStats, CrackShot]
 commands:
     tpworld:
     hangars:
@@ -13,6 +13,10 @@ commands:
     reply:
     armor:
     cfsb:
+    weapons:
+    killsprofile:
+        aliases:
+            - kp
     tag:
         aliases:
             - settag

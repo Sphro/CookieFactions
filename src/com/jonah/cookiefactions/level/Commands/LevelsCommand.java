@@ -39,12 +39,12 @@ public class LevelsCommand implements CommandExecutor {
 				ProgressBar prog = new ProgressBar(p);
 				LevelsLib inst = storage.getLibInstance();
 				p.sendMessage(Text.colorize(String.format("&8&m--------------------------------")));
-				p.sendMessage(Text.colorize(String.format("&aYour Level: &e%s%s", inst.getLevel())));
-				p.sendMessage(Text.colorize(String.format("&aYou have &e%s%s&a Points")));
-				p.sendMessage(Text.colorize(String.format("&aPoints Required for Next Level: &e%s%s" + inst.getRequiredPoints())));
-				p.sendMessage(Text.colorize(String.format("")));
+				p.sendMessage(Text.colorize(String.format("&aYour Level: &e%s", inst.getLevel())));
+				p.sendMessage(Text.colorize(String.format("&aYou have &e%s&a Points", inst.getPoints())));
+				p.sendMessage(Text.colorize(String.format("&aPoints Required for Next Level: &e%s", inst.getRequiredPoints())));
+				p.sendMessage(Text.colorize(" "));
 				p.sendMessage(Text.colorize("&aLevel Progress:"));
-				p.sendMessage(Text.colorize(String.format("%s &8(&a%%s&8)", prog.get(), prog.getPercentage())));
+				p.sendMessage(Text.colorize(String.format("%s &8(&a%s%&8)", prog.get(), prog.getPercentage())));
 				p.sendMessage(Text.colorize(String.format("&8&m--------------------------------")));
 			} else if (args[0].equalsIgnoreCase("addpoints") && p.hasPermission("admin.commands")) {
 				if (args.length == 1) {

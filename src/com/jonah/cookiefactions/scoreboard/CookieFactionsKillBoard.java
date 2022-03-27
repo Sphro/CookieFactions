@@ -32,14 +32,18 @@ public class CookieFactionsKillBoard implements CookieFactionsScoreboard{
 
         try {
             Connection conn = new SQLite(ksmain, "player_data.db").openConnection();
-            for (int i = 1 ; i <= 14 ; i++) {
+            for (int i = 1 ; i <= 15 ; i++) {
                 String playerName = api.getRank_Name("spawn", "kills", String.valueOf(i));
-                String query = "select playerName, kills from killstats_data where playerName = '" + playerName + "'";
+                if (playerName != null) {
+                    String query = "select playerName, kills from killstats_data where playerName = '" + playerName + "'";
 
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query);
-                while (rs.next()) {
-                    killMap.put(playerName, rs.getInt("kills"));
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    while (rs.next()) {
+                        killMap.put(playerName, rs.getInt("kills"));
+                    }
+                } else {
+                    killMap.put("None" + i, i);
                 }
             }
         } catch (SQLException e) {
@@ -63,7 +67,12 @@ public class CookieFactionsKillBoard implements CookieFactionsScoreboard{
         for (int i = 1 ; i <= 15 ; i++) {
 
             for (Map.Entry<String, Integer> entry : killMap.entrySet()) {
-                Score score = obj.getScore(Text.colorize("&c" + entry.getKey()));
+                Score score;
+                if (entry.getKey().startsWith("None")) {
+                    score = obj.getScore(Text.colorize("&4No Player"));
+                } else {
+                    score = obj.getScore(Text.colorize("&c" + entry.getKey()));
+                }
                 score.setScore(entry.getValue());
             }
         }
